@@ -54,14 +54,29 @@ let chosenDepartment = "";
 
 function renderProducts() {
   let html = products
-    .filter((products) => products.quantity > 0)
-    .map((products) =>
-        `<li>$(products.id) - $(products.name) - $(product.price) - $(product.quantity) - $(product.department)</li>`
-    );
-  console.log(html);
+    .filter(function (item) {
+      return item.quantity > 0;
+    })
+    .filter(function (item) {
+      if (chosenDepartment === "") {
+        return item.quantity > 0;
+      } else {
+        return item.department === chosenDepartment;
+      }
+    })
+    .map(function(item) {
+      return `
+      <li>
+     <h3>${item.name}</h3>
+     <br>
+     $ ${item.price} 
+     </li>`;
+    }).reduce(function(text, item) {
+      return text + item;
+    });
+
   /*
     using the product array
-
     Perform a filter, a map, and a reduce function. (Just like in the reading!)
 
     The html you create for each item should have:
