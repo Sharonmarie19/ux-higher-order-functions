@@ -53,7 +53,12 @@ let products = [
 let chosenDepartment = "";
 
 function renderProducts() {
-  let html = ""; // Your code here!
+  let html = products
+    .filter((products) => products.quantity > 0)
+    .map((products) =>
+        `<li>$(products.id) - $(products.name) - $(product.price) - $(product.quantity) - $(product.department)</li>`
+    );
+  console.log(html);
   /*
     using the product array
 
